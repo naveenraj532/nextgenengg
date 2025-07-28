@@ -69,12 +69,12 @@
 
 .slider::before {
   left: 0;
-  background: linear-gradient(to right, rgb(36, 34, 34), rgba(255, 255, 255, 0));
+  background: linear-gradient(to right, rgb(176, 171, 171), rgba(216, 210, 210, 0));
 }
 
 .slider::after {
   right: 0;
-  background: linear-gradient(to left, rgba(36, 34, 34, 1), rgba(255, 255, 255, 0));
+  background: linear-gradient(to left, rgb(176, 171, 171), rgba(216, 210, 210, 0));
 }
 
 

@@ -93,7 +93,7 @@ export default {
         fadeIn: 'fadeIn 1s ease-in-out forwards',
         fadeInUp: 'fadeInUp 1s ease-out forwards',
         'text-pop-up-top': 'text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        'slide-in-elliptic-left-bck': 'slide-in-elliptic-left-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'slide-in-elliptic-left-bck': 'slide-in-elliptic-left-bck 0.7s cubic-bezier(0.255, 0.255, 0.245, 0.4) both',
         'tracking-in-contract-bck': 'tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
         'gradient-text': 'gradient-move 3s ease infinite',
          'color-changing-glow': 'drop-shadow-glow 3s infinite',
@@ -112,6 +112,9 @@ export default {
         navy: '#17224D',     
         lightgray: '#F5FAFA', 
         forestgreen: '#4D9077', 
+              primary: '#781c1c',     // Maroon
+      secondary: '#2f5233',   // Olive Green
+      accent: '#eae0d5',
       },
       boxShadow: {
         '3xl': '0 10px 40px rgba(0, 0, 0, 0.1)'
