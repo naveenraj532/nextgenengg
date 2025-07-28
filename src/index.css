@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .custom-container {
+    @apply rounded-[35.749px] bg-[#F5FAFA] shadow-custom;
+  }
+  .shadow-custom {
+    box-shadow: 0px 0px 16.794px -1.153px rgba(0, 0, 0, 0.25);
+  }
+
+  .shadow-custom-blue {
+    box-shadow: 0px 0px 16.794px -1.153px navy;
+  }
+
+  .shadow-custom-white {
+    box-shadow: 0px 0px 16.794px -1.153px rgb(255, 255, 255);
+  }
+}
+
+@layer components {
+  .max-container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+/* 
+  .input {
+    @apply sm:flex-1 max-sm:w-full text-base leading-normal text-slate-gray pl-5 max-sm:p-5 outline-none sm:border-none border max-sm:border-slate-gray max-sm:rounded-full;
+  } */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.slider {
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: calc(100% - 130px); /* Account for 16px padding on both ends */
+  padding: 0 100px; /* 16px padding on the x-axis */
+}
+
+.slider::before,
+.slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px; /* Adjust based on the desired fade width */
+  z-index: 2;
+}
+
+.slider::before {
+  left: 0;
+  background: linear-gradient(to right, rgb(36, 34, 34), rgba(255, 255, 255, 0));
+}
+
+.slider::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(36, 34, 34, 1), rgba(255, 255, 255, 0));
+}
+
+
+.flip-scale-up-ver {
+	-webkit-animation: flip-scale-up-ver 0.5s linear both;
+	        animation: flip-scale-up-ver 0.5s linear both;
+}
+
+.slide-track {
+  display: flex;
+  height: 100px;
+  animation: scroll 40s linear infinite;
+  width: calc(250px * 31); /* Adjust based on the number of clients times 2 */
+  position: relative;
+  z-index: 1;
+}
+
+.slide {
+  height: 200px;
+  flex-shrink: 0;
+  width: 140px; /* Adjust based on your needs */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@layer utilities {
+  .padding {
+    @apply sm:px-16 px-8 sm:py-24 py-12;
+  }
+
+  .padding-x {
+    @apply sm:px-16 px-8;
+  }
+
+  .padding-y {
+    @apply sm:py-24 py-12;
+  }
+
+  .padding-l {
+    @apply sm:pl-16 pl-8;
+  }
+
+  .padding-r {
+    @apply sm:pr-0 pr-8;
+  }
+
+  .padding-t {
+    @apply sm:pt-24 pt-12;
+  }
+
+  .padding-b {
+    @apply sm:pb-16 pb-12;
+  }
+
+  .info-text {
+    @apply font-montserrat text-slate-gray text-lg leading-7;
+  }
+}
+
+/* Add to your CSS file or Tailwind CSS configuration */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+
+.flip-container {
+  perspective: 1000px;
+  margin: 0 auto 60px auto;
+  width: 320px;
+  height: 200px;
+  cursor: pointer;
+  position: relative;
+}
+
+.flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-container.hover .flipper,
+.flip-container:hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.back iframe {
+  border-radius: 15px;
+}
+
+.flip-scale-up-ver {
+  animation: flip-scale-up-ver 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes flip-scale-up-ver {
+  0% {
+    transform: scale(1) rotateX(0);
+  }
+  50% {
+    transform: scale(1.1) rotateX(180deg);
+  }
+  100% {
+    transform: scale(1) rotateX(360deg);
+  }
+}
+
+.flip-container {
+  perspective: 1000px;
+  width: 300px;
+  height: 350px;
+  margin: 0 auto;
+  cursor: pointer;
+  position: relative;
+
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 89%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.address,
+.license {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.map {
+  width: 100%;
+  height: 200px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.icon {
+  margin-right: 4px;
+}
