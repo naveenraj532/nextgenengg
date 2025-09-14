@@ -118,7 +118,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          NEXTGEN ENGINEERING SOLUTIONS
+          SKYRIN ENGINEERING SOLUTIONS
         </motion.h1>
         <motion.p
           className="text-xl font-medium text-[#b0b0b0] tracking-widest"
@@ -163,11 +163,11 @@ function App() {
         </p>
         <div className="mt-6">
           <a
-            href="/nextgenbooklet.pdf"
-            download="NextGen_Engineering_Booklet.pdf"
+            href="/skyrinbook.pdf"
+            download="Skyrin_Engineering_Booklet.pdf"
             className="inline-block px-5 py-2 bg-[#896a21] text-white rounded-lg shadow hover:bg-[#a07d2a] transition"
           >
-            Download NextGen BookLet
+            Download Skyrin BookLet
           </a>
         </div>
       </section>
