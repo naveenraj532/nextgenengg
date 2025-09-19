@@ -137,7 +137,7 @@ function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          DESIGN | ENGINEERING | CONSULTING
+          ENGINEERING | DESIGN | DETAILING | CONSULTING
         </motion.p>
       </header>
 
