@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { Clients } from "./Clients";
 import { useEffect, useState, useRef } from "react";
-import logo from "../assets/logo.jpg"; // orange + blue logo
+import logo from "../assets/logo.png"; // orange + blue logo
 import ContactInfo from "./ContactInfo";
-import MajorClients from "./MajorClients";
 import {
   FaCogs,
   FaDraftingCompass,
@@ -53,6 +52,17 @@ function App() {
     director: null,
   });
 
+  const ServiceButton = ({ href }) => (
+    <div className="mt-4">
+      <a
+        href={href}
+        className="inline-block text-white bg-orange-600 hover:bg-orange-700 transition px-4 py-2 rounded font-medium text-sm tracking-wide"
+      >
+        Know More →
+      </a>
+    </div>
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       const sectionEntries = Object.entries(sectionRefs.current).map(
@@ -84,13 +94,23 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 font-inter">
       {/* Hero Section */}
-      <header className="h-[100vh] bg-[#0c2020] text-white flex flex-col items-center justify-center text-center px-4 relative">
+      <header
+        className="h-[100vh] relative flex flex-col items-center justify-center text-center px-4"
+        style={{
+          backgroundImage: `url(${require("../assets/background.jpg")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Dark Overlay for contrast */}
+        <div className="absolute inset-0 bg-black/60"></div>
+
         {/* Sticky Navbar */}
         <motion.nav
-          className="fixed top-0 left-0 w-full bg-[#0c2020]/70 backdrop-blur-md 
-             flex justify-end gap-4 sm:gap-6 px-4 sm:px-6 py-4 
-             text-sm sm:text-base lg:text-lg 
-             tracking-wide text-white z-50"
+          className="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-md 
+       flex justify-end gap-4 sm:gap-6 px-4 sm:px-6 py-4 
+       text-sm sm:text-base lg:text-lg 
+       tracking-wide text-white z-50"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -113,16 +133,17 @@ function App() {
         <motion.img
           src={logo}
           alt="Skyrin Logo"
-          className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-6 object-contain"
-          initial={{ opacity: 0, scale: 0.6 }}
+          className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 mb-2 object-contain z-10 drop-shadow-2xl"
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
+          style={{ filter: "drop-shadow(0 0 10px white)" }}
           transition={{ duration: 1.2 }}
         />
 
         {/* Title */}
         <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl 
-             font-extrabold tracking-wide mb-4 text-white"
+          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-6xl 
+       font-extrabold tracking-wide mb-4 text-white drop-shadow-lg z-10"
           initial={{ opacity: 0, y: -60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -130,9 +151,10 @@ function App() {
           SKYRIN ENGINEERING &amp; CONSULTING SERVICES
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
-          className="text-sm sm:text-base md:text-lg lg:text-xl 
-             font-medium text-gray-300 tracking-widest"
+          className="relative text-sm sm:text-base md:text-lg lg:text-xl 
+       font-medium text-gray-200 tracking-widest z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
@@ -182,49 +204,88 @@ function App() {
             Download Company Profile
           </a>
         </div>
+        <div className="mt-8 sm:mt-10 text-center">
+          <p className="italic text-orange-500 font-inter text-sm">
+            Trusted by 100+ happy customers worldwide
+          </p>
+        </div>
       </section>
 
       {/* Services */}
       <section
         id="services"
-        className="bg-gradient-to-r from-blue-50 to-gray-100 px-6 md:px-8 py-20 max-w-7xl mx-auto"
+        className="relative bg-cover bg-center bg-no-repeat py-20 px-6 md:px-8"
+        style={{
+          backgroundImage: `url(${require("../assets/services_background.jpg")})`,
+        }}
       >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        {/* Title */}
         <motion.h2
-          className="text-3xl font-bold text-orange-600 mb-10 text-center"
+          className="relative text-3xl md:text-4xl font-bold text-white mb-10 text-center z-10 tracking-wide"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          Core Capabilities &amp; Services
+          Our Services
         </motion.h2>
 
-        <div className="flex flex-wrap justify-between gap-6">
-          <Section title="Mechanical &amp; Piping Engineering" icon={FaCogs}>
-            Equipment and valve design, stress and FEA analysis, CFD and
-            acoustic analysis, using ASME, IS, and API codes.
+        {/* Service Cards */}
+        <div className="relative flex flex-wrap justify-between gap-6 z-10">
+          <Section title="Mechanical Engineering & Drafting" icon={FaCogs}>
+            Component design, GD&T, manufacturing-ready drawings and simulation.
+            <ServiceButton href="/services/mechanical-drafting" />
           </Section>
+
+          <Section title="Piping Engineering & Drafting" icon={FaBolt}>
+            P&ID creation, 3D modeling, stress analysis, and isometric
+            generation.
+            <ServiceButton href="/services/piping-drafting" />
+          </Section>
+
+          <Section title="PE Review & Stamping" icon={FaStamp}>
+            Professional Engineer review and certification for structural and
+            pressure systems.
+            <ServiceButton href="/services/pe-stamping" />
+          </Section>
+
           <Section
-            title="Civil &amp; Structural Design"
+            title="Structural Engineering & Drafting"
             icon={FaDraftingCompass}
           >
-            Structural detailing, layout planning, fabrication drawings for
-            industrial infrastructure.
+            Steel structures, RCC detailing, and shop drawings for construction.
+            <ServiceButton href="/services/structural-drafting" />
           </Section>
-          <Section title="PE Review &amp; Stamping" icon={FaStamp}>
-            Certification and stamping for tanks, structural elements, and
-            pressure parts.
+
+          <Section title="Metallurgy Consultation" icon={FaLeaf}>
+            Material failure analysis, selection, corrosion mitigation, and
+            coatings.
+            <ServiceButton href="/services/metallurgy" />
           </Section>
-          <Section title="Metallurgy Consultation" icon={FaBolt}>
-            Material selection, boiler failure analysis, coating and fatigue
-            life calculations.
+
+          <Section title="BIM Services" icon={FaCogs}>
+            Revit modeling, clash detection, MEP coordination for architectural
+            & infrastructure projects.
+            <ServiceButton href="/services/bim" />
           </Section>
-          <Section title="Boiler Troubleshooting" icon={FaLeaf}>
-            Solutions for thermal power plant issues, boiler site consultation,
-            fatigue calculations.
+
+          <Section title="Thermal Spray Coatings for Boilers" icon={FaBolt}>
+            Protective coatings for boiler tubes to enhance durability and
+            performance.
+            <ServiceButton href="/services/boiler-coatings" />
           </Section>
-          <Section title="Electric Vehicle Consultation" icon={FaCarSide}>
-            EV design, prototype development, and homologation consulting.
+
+          <Section title="Boiler Fatigue Life Calculations" icon={FaLeaf}>
+            Finite element-based fatigue evaluation for boiler components.
+            <ServiceButton href="/services/boiler-fatigue" />
+          </Section>
+
+          <Section title="Electric Vehicle Design" icon={FaCarSide}>
+            EV architecture, drivetrain integration, and homologation support.
+            <ServiceButton href="/services/ev-design" />
           </Section>
         </div>
       </section>
@@ -233,15 +294,12 @@ function App() {
       <section
         id="clients"
         ref={(el) => (sectionRefs.current.clients = el)}
-        className={`px-4 sm:px-6 xl:padding-0 scroll-mt-24 ${
+        className={`xl:padding-0 scroll-mt-24 ${
           fadeInSections.clients ? "animate-fadeInUp" : ""
         }`}
       >
         <Clients />
       </section>
-
-      {/* Major Clients */}
-      <MajorClients />
 
       {/* Contact Info */}
       <section id="contact">
@@ -258,7 +316,7 @@ function App() {
         >
           Ready to solve your engineering challenges? Contact us at{" "}
           <a href="mailto:info@skyrinengg.com" className="underline">
-            info@skyrinengg.com
+            info@skyrinengineering.com
           </a>
         </motion.p>
         <p className="text-sm mt-2 font-inter">

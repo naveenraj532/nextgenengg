@@ -41,7 +41,7 @@ const ContactInfo = () => {
             <div>
               <p className="font-semibold">Email</p>
               <a href="mailto:info@skyrinengg.com" className="underline">
-                info@skyrinengg.com
+                info@skyrinengineering.com{" "}
               </a>
             </div>
           </div>
