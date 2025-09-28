@@ -11,6 +11,7 @@ import {
   FaStamp,
   FaCarSide,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Section = ({ title, icon: Icon, children }) => (
   <motion.div
@@ -52,14 +53,14 @@ function App() {
     director: null,
   });
 
-  const ServiceButton = ({ href }) => (
+  const ServiceButton = ({ to }) => (
     <div className="mt-4">
-      <a
-        href={href}
+      <Link
+        to={to}
         className="inline-block text-white bg-orange-600 hover:bg-orange-700 transition px-4 py-2 rounded font-medium text-sm tracking-wide"
       >
         Know More →
-      </a>
+      </Link>
     </div>
   );
 
@@ -237,7 +238,7 @@ function App() {
         <div className="relative flex flex-wrap justify-between gap-6 z-10">
           <Section title="Mechanical Engineering & Drafting" icon={FaCogs}>
             Component design, GD&T, manufacturing-ready drawings and simulation.
-            <ServiceButton href="/services/mechanical-drafting" />
+            <ServiceButton to="/services/mechanical-drafting" />
           </Section>
 
           <Section title="Piping Engineering & Drafting" icon={FaBolt}>
@@ -307,7 +308,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0c2020] text-gray-200 p-6 text-center mt-0">
+      <footer className="bg-black text-gray-200 p-6 text-center mt-0">
         <motion.p
           className="text-md font-inter"
           initial={{ opacity: 0 }}

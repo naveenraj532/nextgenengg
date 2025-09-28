@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './components/App';
+// src/index.js
+// CHANGED: Wrapped AppRoutes with BrowserRouter and mounted it instead of App directly
 
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; // NEW: import router
+import AppRoutes from "./AppRoutes"; // NEW: use AppRoutes instead of App
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById("root"));
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <AppRoutes /> {/* NEW: Handles "/" and "/services/:slug" */}
+  </BrowserRouter>
 );
-
-
