@@ -109,9 +109,9 @@ function App() {
         {/* Sticky Navbar */}
         <motion.nav
           className="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-md 
-       flex justify-end gap-4 sm:gap-6 px-4 sm:px-6 py-4 
-       text-sm sm:text-base lg:text-lg 
-       tracking-wide text-white z-50"
+   flex justify-end gap-4 sm:gap-6 px-4 sm:px-6 py-4 
+   text-sm sm:text-base lg:text-lg 
+   tracking-wide text-white z-50"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -125,6 +125,9 @@ function App() {
           <a href="#clients" className="hover:text-orange-500 transition">
             Softwares
           </a>
+          <Link to="/careers" className="hover:text-orange-500 transition">
+            Careers
+          </Link>
           <a href="#contact" className="hover:text-orange-500 transition">
             Contact
           </a>
@@ -244,13 +247,13 @@ function App() {
           <Section title="Piping Engineering & Drafting" icon={FaBolt}>
             P&ID creation, 3D modeling, stress analysis, and isometric
             generation.
-            <ServiceButton href="/services/piping-drafting" />
+            <ServiceButton to="/services/piping-drafting" />
           </Section>
 
           <Section title="PE Review & Stamping" icon={FaStamp}>
             Professional Engineer review and certification for structural and
             pressure systems.
-            <ServiceButton href="/services/pe-stamping" />
+            <ServiceButton to="/services/pe-stamping" />
           </Section>
 
           <Section
@@ -258,35 +261,35 @@ function App() {
             icon={FaDraftingCompass}
           >
             Steel structures, RCC detailing, and shop drawings for construction.
-            <ServiceButton href="/services/structural-drafting" />
+            <ServiceButton to="/services/structural-drafting" />
           </Section>
 
           <Section title="Metallurgy Consultation" icon={FaLeaf}>
             Material failure analysis, selection, corrosion mitigation, and
             coatings.
-            <ServiceButton href="/services/metallurgy" />
+            <ServiceButton to="/services/metallurgy" />
           </Section>
 
           <Section title="BIM Services" icon={FaCogs}>
             Revit modeling, clash detection, MEP coordination for architectural
             & infrastructure projects.
-            <ServiceButton href="/services/bim" />
+            <ServiceButton to="/services/bim" />
           </Section>
 
           <Section title="Thermal Spray Coatings for Boilers" icon={FaBolt}>
             Protective coatings for boiler tubes to enhance durability and
             performance.
-            <ServiceButton href="/services/boiler-coatings" />
+            <ServiceButton to="/services/boiler-coatings" />
           </Section>
 
           <Section title="Boiler Fatigue Life Calculations" icon={FaLeaf}>
             Finite element-based fatigue evaluation for boiler components.
-            <ServiceButton href="/services/boiler-fatigue" />
+            <ServiceButton to="/services/boiler-fatigue" />
           </Section>
 
           <Section title="Electric Vehicle Design" icon={FaCarSide}>
             EV architecture, drivetrain integration, and homologation support.
-            <ServiceButton href="/services/ev-design" />
+            <ServiceButton to="/services/ev-design" />
           </Section>
         </div>
       </section>
@@ -308,7 +311,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-200 p-6 text-center mt-0">
+      <footer className="bg-black text-gray-200 p-1 text-center mt-0">
         <motion.p
           className="text-md font-inter"
           initial={{ opacity: 0 }}

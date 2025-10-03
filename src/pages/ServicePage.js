@@ -1,11 +1,17 @@
 // src/pages/ServicePage.jsx
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import ServiceTemplate from "../components/ServiceTemplate";
 import { services } from "../data/services";
 
 export default function ServicePage() {
   const { slug } = useParams();
   const service = services.find((s) => s.slug === slug);
+
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!service) {
     return (

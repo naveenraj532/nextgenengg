@@ -1,18 +1,23 @@
 // src/data/services.js
-// First service content taken from your company booklet (Mechanical capabilities).
-// Source: Skyrin_Engineering_Booklet.pdf. :contentReference[oaicite:1]{index=1}
-
-import { FaCogs } from "react-icons/fa";
+import { 
+  FaCogs, 
+  FaBolt, 
+  FaStamp, 
+  FaDraftingCompass, 
+  FaLeaf, 
+  FaCarSide,
+  FaFire,
+  FaCalculator,
+  FaCube
+} from "react-icons/fa";
 
 export const services = [
   {
     slug: "mechanical-drafting",
     title: "Mechanical Engineering & Drafting",
-    short:
-      "Component design, GD&T, manufacturing-ready drawings and simulation.",
+    short: "Component design, GD&T, manufacturing-ready drawings and simulation.",
     icon: FaCogs,
-    overview:
-      "Full-cycle mechanical engineering & drafting services: equipment design, valve specification, FEA/CFD support and manufacturing-ready documentation.",
+    overview: "Full-cycle mechanical engineering & drafting services: equipment design, valve specification, FEA/CFD support and manufacturing-ready documentation.",
     capabilities: [
       "Equipment Design",
       "Valve Specifications",
@@ -44,5 +49,267 @@ export const services = [
     },
   },
 
-  // add other services here similarly (slug must be unique)
+  {
+    slug: "piping-drafting",
+    title: "Piping Engineering & Drafting",
+    short: "P&ID creation, 3D modeling, stress analysis, and isometric generation.",
+    icon: FaBolt,
+    overview: "Comprehensive piping engineering services from plant layout and P&ID development to stress analysis, isometric generation, and complete 3D modeling with shop drawings.",
+    capabilities: [
+      "Plant and Piping Layout & Routing",
+      "P&ID & GA Drawings",
+      "Piping Stress Analysis",
+      "Piping Support and Hanger Design",
+      "Boiler & Piping Lug Attachment",
+      "Isometric Drawings and BOM",
+      "Piping 3D Modeling & Shop Drawings",
+      "Material specification and selection",
+      "Pipe routing optimization",
+      "Equipment nozzle orientation studies",
+    ],
+    deliverables: [
+      "P&ID and GA drawings",
+      "3D piping models and shop drawings",
+      "Stress analysis reports",
+      "Isometric drawings with BOM",
+      "Support and hanger design drawings",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "pe-stamping",
+    title: "PE Review & Stamping",
+    short: "Professional Engineer review and certification for structural and pressure systems.",
+    icon: FaStamp,
+    overview: "Professional Engineer (PE) review and stamping services ensuring compliance with US engineering standards including AISC, ACI, ASCE, IBC, OSHA, and NFPA codes.",
+    capabilities: [
+      "Design Standards & Codes compliance (AISC, ACI 318, ACI 350)",
+      "ASCE 7 load calculations",
+      "IBC code compliance review",
+      "OSHA safety standards verification",
+      "NFPA fire protection standards",
+      "Structural steel design review",
+      "Concrete design review",
+      "Foundation design review",
+      "Seismic and wind load verification",
+    ],
+    deliverables: [
+      "PE stamped drawings and calculations",
+      "Code compliance reports",
+      "Design review documentation",
+      "Engineering certification letters",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "structural-drafting",
+    title: "Structural Engineering & Drafting",
+    short: "Steel structures, RCC detailing, and shop drawings for construction.",
+    icon: FaDraftingCompass,
+    overview: "Complete structural engineering and detailing services for RCC and steel structures, from design and analysis to fabrication-ready shop drawings.",
+    capabilities: [
+      "RCC & Steel Structure Design (IS 456, IS 800, AISC, BS Codes)",
+      "Structural Analysis & Load Calculations",
+      "Foundation Design (Isolated, Raft, Pile, Combined)",
+      "Industrial Building & Equipment Support Structures",
+      "Module/Skid Structural Design",
+      "Water Retaining Structures Design",
+      "Seismic & Wind Load Design",
+      "Retaining Walls, Water Tanks, Silos, Pipe Racks",
+      "Architectural & Layout Planning",
+      "Earthwork & Land Development Plans",
+      "Utility Duct Banks, Cable Trenches",
+      "3D Model and Shop Drawings",
+      "Connection Design",
+      "Reinforcement detailing for slabs, beams, columns",
+      "Bar Bending Schedules (BBS)",
+      "Steel frame, platform, and support detailing",
+    ],
+    deliverables: [
+      "Structural design calculations and reports",
+      "3D structural models",
+      "GA and shop drawings",
+      "Reinforcement detailing drawings",
+      "Bar Bending Schedules (BBS)",
+      "Connection details and weld maps",
+      "Material Take-Off (MTO) & BOM",
+      "Erection sequences and marking plans",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "metallurgy",
+    title: "Metallurgy Consultation",
+    short: "Material failure analysis, selection, corrosion mitigation, and coatings.",
+    icon: FaLeaf,
+    overview: "Expert metallurgical consulting services including material selection, failure analysis, corrosion studies, and high-temperature surface engineering solutions.",
+    capabilities: [
+      "Material selection and specification",
+      "Boiler tube failure analysis",
+      "High temperature surface engineering",
+      "Corrosion analysis and mitigation",
+      "Welding metallurgy consultation",
+      "Heat treatment recommendations",
+      "Material testing and characterization",
+      "Coating selection and specification",
+      "Life assessment studies",
+      "Root cause failure analysis",
+    ],
+    deliverables: [
+      "Material selection reports",
+      "Failure analysis reports with recommendations",
+      "Metallurgical investigation documentation",
+      "Coating and surface treatment specifications",
+      "Life assessment and remaining life calculations",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "bim",
+    title: "BIM Services",
+    short: "Revit modeling, clash detection, MEP coordination for architectural & infrastructure projects.",
+    icon: FaCube,
+    overview: "Building Information Modeling (BIM) services for architectural, structural, and MEP projects with comprehensive 3D modeling, clash detection, and project coordination.",
+    capabilities: [
+      "3D BIM Modeling (Architectural, Structural, MEP)",
+      "Clash Detection & Coordination",
+      "Scheduling & Simulation",
+      "Cost Estimation",
+      "Scan to BIM",
+      "BIM Documentation & Drawings",
+      "4D construction sequencing",
+      "5D cost management",
+      "As-built documentation",
+      "BIM coordination and collaboration",
+    ],
+    deliverables: [
+      "3D BIM models (Revit, Navisworks)",
+      "Clash detection reports",
+      "Coordinated MEP drawings",
+      "Quantity take-offs and cost estimates",
+      "Construction schedules and 4D simulations",
+      "As-built BIM models",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "boiler-coatings",
+    title: "Thermal Spray Coatings for Boilers",
+    short: "Protective coatings for boiler tubes to enhance durability and performance.",
+    icon: FaFire,
+    overview: "Advanced thermal spray coating solutions for boiler components to prevent corrosion, erosion, and high-temperature degradation, extending equipment life and improving efficiency.",
+    capabilities: [
+      "High-temperature coating application",
+      "Corrosion-resistant coatings",
+      "Erosion-resistant coatings",
+      "Thermal barrier coatings",
+      "Boiler tube protection",
+      "Water wall tube coating",
+      "Superheater and reheater tube coating",
+      "Coating material selection",
+      "Surface preparation and inspection",
+      "Quality assurance and testing",
+    ],
+    deliverables: [
+      "Coating specification reports",
+      "Surface preparation procedures",
+      "Application process documentation",
+      "Quality control and inspection reports",
+      "Performance guarantee documentation",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "boiler-fatigue",
+    title: "Boiler Fatigue Life Calculations",
+    short: "Finite element-based fatigue evaluation for boiler components.",
+    icon: FaCalculator,
+    overview: "Advanced finite element analysis (FEA) for boiler component fatigue life assessment, helping predict remaining life and plan maintenance schedules effectively.",
+    capabilities: [
+      "Finite element analysis (FEA) of boiler components",
+      "Fatigue life assessment",
+      "Creep-fatigue interaction analysis",
+      "Thermal stress analysis",
+      "Remaining life calculations",
+      "Start-up and shut-down cycle analysis",
+      "Pressure part life assessment",
+      "Critical component evaluation",
+      "Maintenance planning support",
+      "Life extension studies",
+    ],
+    deliverables: [
+      "FEA reports with stress distribution",
+      "Fatigue life calculation reports",
+      "Remaining life assessment",
+      "Critical location identification",
+      "Maintenance recommendation reports",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
+
+  {
+    slug: "ev-design",
+    title: "Electric Vehicle Design",
+    short: "EV architecture, drivetrain integration, and homologation support.",
+    icon: FaCarSide,
+    overview: "Complete electric vehicle design and engineering services from concept to homologation, including battery systems, drivetrain, chassis, and regulatory compliance.",
+    capabilities: [
+      "Vehicle Architecture & System Design",
+      "Battery Pack Design",
+      "Electric Drivetrain Design",
+      "Body Structure & Chassis Engineering",
+      "Charging System Integration",
+      "Electrical & Embedded Systems",
+      "Simulation & Testing Support",
+      "Homologation assistance (AIS 038, AIS 156, CMVR)",
+      "Vehicle dynamics and performance optimization",
+      "Thermal management systems",
+      "Safety system integration",
+    ],
+    deliverables: [
+      "Vehicle architecture drawings",
+      "Battery pack design documentation",
+      "Drivetrain system specifications",
+      "Chassis and body structure drawings",
+      "Electrical system schematics",
+      "Simulation and testing reports",
+      "Homologation documentation support",
+    ],
+    contact: {
+      email: "info@skyrinengineering.com",
+      phone: "+91 9884988607",
+    },
+  },
 ];
+
+// Helper function to get service by slug
+export const getServiceBySlug = (slug) => {
+  return services.find(service => service.slug === slug);
+};

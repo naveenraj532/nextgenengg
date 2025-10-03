@@ -32,7 +32,7 @@ const ContactInfo = () => {
             <FaPhoneAlt className="text-orange-600 text-xl mt-1" />
             <div>
               <p className="font-semibold">Phone</p>
-              <p>+91 8870003334</p>
+              <p>+91 9884988607 | +61 469 322 771 (AU) | +44 77 4151 9310 (UK) | +49 1521 8739837 (Germany)</p>
             </div>
           </div>
 
