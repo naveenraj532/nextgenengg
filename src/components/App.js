@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Clients } from "./Clients";
-import { useEffect, useState, useRef } from "react";
-import logo from "../assets/logo.png"; // orange + blue logo
-import ContactInfo from "./ContactInfo";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Clients } from "./Clients"; // Add this import
+
 import {
   FaCogs,
   FaDraftingCompass,
@@ -10,323 +10,683 @@ import {
   FaLeaf,
   FaStamp,
   FaCarSide,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaCheckCircle,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-const Section = ({ title, icon: Icon, children }) => (
+// Service Card Component
+const ServiceCard = ({ title, icon: Icon, children, to }) => (
   <motion.div
-    className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition duration-300 w-full md:w-[48%] lg:w-[30%]"
-    whileHover={{ scale: 1.05 }}
+    className="relative bg-white rounded-2xl p-7 shadow-lg hover:shadow-2xl transition-all duration-300 w-full md:w-[48%] lg:w-[31%] border border-orange-100 group overflow-hidden"
+    whileHover={{ y: -10, scale: 1.02 }}
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
+    transition={{ duration: 0.5 }}
   >
-    <div className="flex items-center space-x-4 mb-4">
-      <Icon className="text-orange-600 text-3xl" />
-      <h3 className="text-xl font-semibold text-gray-800 font-inter">
+    {/* Animated gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-blue-600/0 group-hover:from-orange-500/5 group-hover:to-blue-600/5 transition-all duration-500 rounded-2xl"></div>
+
+    <div className="relative z-10">
+      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-blue-700 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+        <Icon className="text-white text-2xl" />
+      </div>
+      <h3 className="text-xl font-bold text-blue-800 mb-3 group-hover:text-orange-600 transition">
         {title}
       </h3>
+      <p className="text-gray-700 text-sm leading-relaxed mb-5">{children}</p>
+      <Link
+        to={to}
+        className="inline-flex items-center gap-2 text-orange-600 font-semibold text-sm hover:text-blue-700 transition group-hover:gap-3"
+      >
+        Learn More
+        <span className="transition-all">→</span>
+      </Link>
     </div>
-    <p className="text-gray-600 text-sm leading-relaxed font-inter">
-      {children}
-    </p>
+
+    {/* Decorative corner element */}
+    <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-orange-200 to-blue-200 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+  </motion.div>
+);
+
+// Stats Component
+const StatCard = ({ number, label }) => (
+  <motion.div
+    className="relative bg-gradient-to-br from-orange-600 via-orange-500 to-blue-700 text-center p-8 rounded-2xl shadow-xl overflow-hidden group hover:scale-105 transition-transform duration-300"
+    initial={{ opacity: 0, scale: 0.8 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div className="relative z-10">
+      <div className="text-5xl md:text-6xl font-extrabold text-white mb-3 drop-shadow-lg">
+        {number}
+      </div>
+      <div className="text-white text-sm font-semibold tracking-wide uppercase">
+        {label}
+      </div>
+    </div>
+    <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
   </motion.div>
 );
 
 function App() {
-  const [fadeInSections, setFadeInSections] = useState({
-    imageLoader: false,
-    moreAboutUs: false,
-    services: false,
-    blog: false,
-    clients: false,
-    director: false,
-  });
-
-  const sectionRefs = useRef({
-    imageLoader: null,
-    moreAboutUs: null,
-    services: null,
-    blog: null,
-    clients: null,
-    director: null,
-  });
-
-  const ServiceButton = ({ to }) => (
-    <div className="mt-4">
-      <Link
-        to={to}
-        className="inline-block text-white bg-orange-600 hover:bg-orange-700 transition px-4 py-2 rounded font-medium text-sm tracking-wide"
-      >
-        Know More →
-      </Link>
-    </div>
-  );
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionEntries = Object.entries(sectionRefs.current).map(
-        ([key, ref]) => ({
-          key,
-          isVisible:
-            ref && ref.getBoundingClientRect().top < window.innerHeight,
-        })
-      );
-
-      const newFadeInSections = sectionEntries.reduce(
-        (acc, { key, isVisible }) => {
-          acc[key] = isVisible;
-          return acc;
-        },
-        {}
-      );
-
-      setFadeInSections(newFadeInSections);
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
+      {/* Navbar */}
+      <motion.nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-lg shadow-lg py-3"
+            : "bg-black/50 backdrop-blur-md py-4"
+        }`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <span
+            className={`font-bold text-2xl tracking-wider ${
+              scrolled
+                ? "bg-gradient-to-r from-orange-600 to-blue-700 bg-clip-text text-transparent"
+                : "text-white"
+            }`}
+          >
+            SKYRIN
+          </span>
+
+          <div className="hidden md:flex items-center gap-8">
+            <a
+              href="#about"
+              className={`font-medium text-sm hover:text-orange-600 transition ${
+                scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
+              }`}
+            >
+              About
+            </a>
+            <a
+              href="#services"
+              className={`font-medium text-sm hover:text-orange-600 transition ${
+                scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
+              }`}
+            >
+              Services
+            </a>
+            <a
+              href="#clients"
+              className={`font-medium text-sm hover:text-orange-600 transition ${
+                scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
+              }`}
+            >
+              Clients
+            </a>
+            <Link to="/careers" className={`font-medium text-sm hover:text-orange-600 transition ${
+                scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
+              }`}>
+              Careers
+            </Link>
+            <a
+              href="#contact"
+              className="px-5 py-2 bg-gradient-to-r from-orange-600 to-blue-700 text-white rounded-lg font-semibold text-sm hover:from-orange-700 hover:to-blue-800 transition shadow-md hover:shadow-lg"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </motion.nav>
+
       {/* Hero Section */}
-      <header
-        className="h-[100vh] relative flex flex-col items-center justify-center text-center px-4"
+      <section
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24"
         style={{
           backgroundImage: `url(${require("../assets/background.jpg")})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        {/* Dark Overlay for contrast */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-slate-900/70 to-black/75"></div>
 
-        {/* Sticky Navbar */}
-        <motion.nav
-          className="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-md 
-   flex justify-end gap-4 sm:gap-6 px-4 sm:px-6 py-4 
-   text-sm sm:text-base lg:text-lg 
-   tracking-wide text-white z-50"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <a href="#about" className="hover:text-orange-500 transition">
-            About
-          </a>
-          <a href="#services" className="hover:text-orange-500 transition">
-            Services
-          </a>
-          <a href="#clients" className="hover:text-orange-500 transition">
-            Softwares
-          </a>
-          <Link to="/careers" className="hover:text-orange-500 transition">
-            Careers
-          </Link>
-          <a href="#contact" className="hover:text-orange-500 transition">
-            Contact
-          </a>
-        </motion.nav>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          {/* Logo */}
+          <motion.img
+            src={require("../assets/logo.png")}
+            alt="Skyrin Logo"
+            className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain mx-auto mb-6 sm:mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ filter: "drop-shadow(0 0 25px rgba(255,255,255,0.4))" }}
+          />
 
-        {/* Logo */}
-        <motion.img
-          src={logo}
-          alt="Skyrin Logo"
-          className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 mb-2 object-contain z-10 drop-shadow-2xl"
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          style={{ filter: "drop-shadow(0 0 10px white)" }}
-          transition={{ duration: 1.2 }}
-        />
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-8"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500/20 to-blue-600/20 backdrop-blur-md rounded-full border border-white/20">
+              <span className="text-white text-xs sm:text-sm font-semibold tracking-wider">
+                ENGINEERING EXCELLENCE SINCE 2022
+              </span>
+            </div>
+          </motion.div>
 
-        {/* Title */}
-        <motion.h1
-          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-6xl 
-       font-extrabold tracking-wide mb-4 text-white drop-shadow-lg z-10"
-          initial={{ opacity: 0, y: -60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          SKYRIN ENGINEERING &amp; CONSULTING SERVICES
-        </motion.h1>
+          {/* Main Title */}
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-5 sm:mb-6 leading-tight tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            style={{
+              textShadow: "0 4px 30px rgba(0,0,0,0.6)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            SKYRIN ENGINEERING
+            <br />
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
+              &amp; CONSULTING SERVICES
+            </span>
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          className="relative text-sm sm:text-base md:text-lg lg:text-xl 
-       font-medium text-gray-200 tracking-widest z-10"
+          {/* Subtitle */}
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-gray-200 font-medium mb-10 sm:mb-12 max-w-2xl mx-auto tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+          >
+            Engineering • Design • Detailing • Consulting
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <a
+              href="#services"
+              className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg font-bold text-sm sm:text-base hover:from-orange-700 hover:to-orange-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Explore Services
+            </a>
+            <a
+              href="#contact"
+              className="w-full sm:w-auto px-8 py-3.5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-lg font-bold text-sm sm:text-base hover:bg-white/20 transition-all duration-300 shadow-lg"
+            >
+              Get in Touch
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
         >
-          ENGINEERING | DESIGN | DETAILING | CONSULTING
-        </motion.p>
-      </header>
-
-      {/* About Us */}
-      <section id="about" className="py-16 px-6 md:px-8 max-w-6xl mx-auto">
-        <motion.h2
-          className="text-3xl font-bold text-orange-600 mb-6"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          About Us
-        </motion.h2>
-        <p className="text-gray-700 text-md leading-relaxed font-inter">
-          At Skyrin Engineering, we specialize in providing innovative and
-          customized engineering services to businesses seeking practical,
-          sustainable, and cost-effective solutions. Whether you&apos;re a
-          start-up or an established enterprise, our goal is to help you
-          navigate complex engineering challenges and optimize your operations.
-        </p>
-        <br />
-        <p className="text-gray-700 text-md leading-relaxed font-inter">
-          Founded in 2022, Skyrin was created with a vision to blend
-          cutting-edge technology with expert engineering. Our team includes
-          seasoned professionals from mechanical, electrical, civil, and
-          metallurgical disciplines who collaborate to drive efficiency and
-          productivity.
-        </p>
-        <br />
-        <p className="text-gray-700 text-md leading-relaxed font-inter">
-          We are guided by our core values of innovation, collaboration, and
-          integrity. As we grow, we aim to expand into new industries and
-          continue providing forward-thinking solutions.
-        </p>
-        <div className="mt-6">
-          <a
-            href="/skyrinbook.pdf"
-            download="Skyrin_Engineering_Booklet.pdf"
-            className="inline-block px-6 py-2 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-700 transition"
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2"
           >
-            Download Company Profile
-          </a>
+            <span className="text-white/60 text-xs font-medium tracking-wider">
+              SCROLL
+            </span>
+            <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-1.5">
+              <div className="w-1 h-2 bg-white/50 rounded-full"></div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-3xl"></div>
         </div>
-        <div className="mt-8 sm:mt-10 text-center">
-          <p className="italic text-orange-500 font-inter text-sm">
-            Trusted by 100+ happy customers worldwide
-          </p>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <StatCard number="100+" label="Happy Clients" />
+            <StatCard number="500+" label="Projects Completed" />
+            <StatCard number="15+" label="Countries Served" />
+            <StatCard number="3+" label="Years Experience" />
+          </div>
         </div>
       </section>
 
-      {/* Services */}
+      {/* About Section */}
+      <section
+        id="about"
+        className="py-24 px-6 bg-gradient-to-br from-slate-50 via-orange-50/20 to-blue-50/20 relative"
+      >
+        {/* Subtle background pattern */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgb(234, 88, 12) 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold italic text-slate-800 mb-4">
+              About Skyrin Engineering
+            </h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-orange-600 via-orange-500 to-blue-600 mx-auto rounded-full"></div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+                <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                  At Skyrin Engineering, we specialize in providing innovative
+                  and customized engineering services to businesses seeking
+                  practical, sustainable, and cost-effective solutions.
+                </p>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  Founded in 2022, Skyrin was created with a vision to blend
+                  cutting-edge technology with expert engineering. Our team
+                  includes seasoned professionals from mechanical, electrical,
+                  civil, and metallurgical disciplines.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3 bg-gradient-to-r from-orange-100 to-blue-100 p-5 rounded-xl shadow-md">
+                <FaCheckCircle className="text-4xl flex-shrink-0 text-orange-600" />
+                <span className="font-bold text-lg text-gray-800">
+                  ISO Certified Excellence
+                </span>
+              </div>
+
+              <a
+                href="/skyrinbook.pdf"
+                download="Skyrin_Engineering_Booklet.pdf"
+                className="inline-block px-8 py-4 bg-slate-800 text-white rounded-xl font-semibold hover:bg-slate-900 transition shadow-lg hover:shadow-xl"
+              >
+                Download Profile
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="grid grid-cols-2 gap-5"
+            >
+              <div className="bg-gradient-to-br from-orange-600 to-orange-700 p-6 rounded-2xl shadow-xl text-white transform hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl font-extrabold mb-2 text-white">
+                  Innovation
+                </div>
+                <p className="text-orange-100 text-xs leading-tight">
+                  Cutting-edge solutions
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl shadow-xl text-white mt-8 transform hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl font-extrabold mb-2 text-white">
+                  Quality
+                </div>
+                <p className="text-gray-200 text-xs leading-tight">
+                  Uncompromised standards
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl shadow-xl text-white transform hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl font-extrabold mb-2 text-white">
+                  Integrity
+                </div>
+                <p className="text-gray-200 text-xs leading-tight">
+                  Transparent practices
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-orange-600 to-orange-700 p-6 rounded-2xl shadow-xl text-white mt-8 transform hover:scale-105 transition-transform duration-300">
+                <div className="text-3xl font-extrabold mb-2 text-white">
+                  Excellence
+                </div>
+                <p className="text-orange-100 text-xs leading-tight">
+                  Proven track record
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
       <section
         id="services"
-        className="relative bg-cover bg-center bg-no-repeat py-20 px-6 md:px-8"
+        className="relative py-24 px-6"
         style={{
           backgroundImage: `url(${require("../assets/services_background.jpg")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       >
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        {/* Dark overlay with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-slate-900/75 to-black/80"></div>
 
-        {/* Title */}
-        <motion.h2
-          className="relative text-3xl md:text-4xl font-bold text-white mb-10 text-center z-10 tracking-wide"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Our Services
-        </motion.h2>
-
-        {/* Service Cards */}
-        <div className="relative flex flex-wrap justify-between gap-6 z-10">
-          <Section title="Mechanical Engineering & Drafting" icon={FaCogs}>
-            Component design, GD&T, manufacturing-ready drawings and simulation.
-            <ServiceButton to="/services/mechanical-drafting" />
-          </Section>
-
-          <Section title="Piping Engineering & Drafting" icon={FaBolt}>
-            P&ID creation, 3D modeling, stress analysis, and isometric
-            generation.
-            <ServiceButton to="/services/piping-drafting" />
-          </Section>
-
-          <Section title="PE Review & Stamping" icon={FaStamp}>
-            Professional Engineer review and certification for structural and
-            pressure systems.
-            <ServiceButton to="/services/pe-stamping" />
-          </Section>
-
-          <Section
-            title="Structural Engineering & Drafting"
-            icon={FaDraftingCompass}
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            Steel structures, RCC detailing, and shop drawings for construction.
-            <ServiceButton to="/services/structural-drafting" />
-          </Section>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Our Services
+            </h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-orange-500 via-orange-400 to-blue-500 mx-auto rounded-full mb-4"></div>
+            <p className="text-gray-200 text-lg max-w-2xl mx-auto">
+              Comprehensive engineering solutions tailored to your needs
+            </p>
+          </motion.div>
 
-          <Section title="Metallurgy Consultation" icon={FaLeaf}>
-            Material failure analysis, selection, corrosion mitigation, and
-            coatings.
-            <ServiceButton to="/services/metallurgy" />
-          </Section>
+          <div className="flex flex-wrap justify-center gap-6">
+            <ServiceCard
+              title="Mechanical Engineering & Drafting"
+              icon={FaCogs}
+              to="/services/mechanical-drafting"
+            >
+              Component design, GD&T, manufacturing-ready drawings and
+              simulation.
+            </ServiceCard>
 
-          <Section title="BIM Services" icon={FaCogs}>
-            Revit modeling, clash detection, MEP coordination for architectural
-            & infrastructure projects.
-            <ServiceButton to="/services/bim" />
-          </Section>
+            <ServiceCard
+              title="Piping Engineering & Drafting"
+              icon={FaBolt}
+              to="/services/piping-drafting"
+            >
+              P&ID creation, 3D modeling, stress analysis, and isometric
+              generation.
+            </ServiceCard>
 
-          <Section title="Thermal Spray Coatings for Boilers" icon={FaBolt}>
-            Protective coatings for boiler tubes to enhance durability and
-            performance.
-            <ServiceButton to="/services/boiler-coatings" />
-          </Section>
+            <ServiceCard
+              title="PE Review & Stamping"
+              icon={FaStamp}
+              to="/services/pe-stamping"
+            >
+              Professional Engineer review and certification for structural
+              systems.
+            </ServiceCard>
 
-          <Section title="Boiler Fatigue Life Calculations" icon={FaLeaf}>
-            Finite element-based fatigue evaluation for boiler components.
-            <ServiceButton to="/services/boiler-fatigue" />
-          </Section>
+            <ServiceCard
+              title="Structural Engineering & Drafting"
+              icon={FaDraftingCompass}
+              to="/services/structural-drafting"
+            >
+              Steel structures, RCC detailing, and shop drawings for
+              construction.
+            </ServiceCard>
 
-          <Section title="Electric Vehicle Design" icon={FaCarSide}>
-            EV architecture, drivetrain integration, and homologation support.
-            <ServiceButton to="/services/ev-design" />
-          </Section>
+            <ServiceCard
+              title="Metallurgy Consultation"
+              icon={FaLeaf}
+              to="/services/metallurgy"
+            >
+              Material failure analysis, selection, and corrosion mitigation.
+            </ServiceCard>
+
+            <ServiceCard title="BIM Services" icon={FaCogs} to="/services/bim">
+              Revit modeling, clash detection, MEP coordination for projects.
+            </ServiceCard>
+
+            <ServiceCard
+              title="Thermal Spray Coatings for Boilers"
+              icon={FaBolt}
+              to="/services/boiler-coatings"
+            >
+              Protective coatings for boiler tubes to enhance durability.
+            </ServiceCard>
+
+            <ServiceCard
+              title="Boiler Fatigue Life Calculations"
+              icon={FaLeaf}
+              to="/services/boiler-fatigue"
+            >
+              Finite element-based fatigue evaluation for components.
+            </ServiceCard>
+
+            <ServiceCard
+              title="Electric Vehicle Design"
+              icon={FaCarSide}
+              to="/services/ev-design"
+            >
+              EV architecture, drivetrain integration, and homologation support.
+            </ServiceCard>
+          </div>
         </div>
       </section>
 
-      {/* Clients */}
-      <section
-        id="clients"
-        ref={(el) => (sectionRefs.current.clients = el)}
-        className={`xl:padding-0 scroll-mt-24 ${
-          fadeInSections.clients ? "animate-fadeInUp" : ""
-        }`}
-      >
+      {/* Clients Section */}
+      <section id="clients" className="scroll-mt-24">
         <Clients />
       </section>
 
-      {/* Contact Info */}
-      <section id="contact">
-        <ContactInfo />
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="py-24 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden"
+      >
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-0 w-96 h-96 bg-orange-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-600 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Get in Touch
+            </h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-orange-500 via-orange-400 to-blue-500 mx-auto rounded-full mb-4"></div>
+            <p className="text-gray-300 text-lg">
+              Ready to start your next project? We&apos;re here to help.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Cards */}
+            <div className="space-y-5">
+              <motion.div
+                className="flex items-start space-x-5 p-7 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition border border-white/20 hover:bg-white/15"
+                whileHover={{ y: -5, scale: 1.02 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <FaPhoneAlt className="text-white text-xl" />
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-2 text-lg">Phone</p>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    +91 99403 48468
+                    <br />
+                    +61 469 322 771 (AU)
+                    <br />
+                    +44 77 4151 9310 (UK)
+                    <br />
+                    +49 1521 8739837 (DE)
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start space-x-5 p-7 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition border border-white/20 hover:bg-white/15"
+                whileHover={{ y: -5, scale: 1.02 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <FaEnvelope className="text-white text-xl" />
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-2 text-lg">Email</p>
+                  <a
+                    href="mailto:info@skyrinengineering.com"
+                    className="text-sm text-orange-300 hover:text-orange-200 hover:underline transition"
+                  >
+                    info@skyrinengineering.com
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start space-x-5 p-7 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition border border-white/20 hover:bg-white/15"
+                whileHover={{ y: -5, scale: 1.02 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <FaMapMarkerAlt className="text-white text-xl" />
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-2 text-lg">Address</p>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    Office 15702 E6 2JA
+                    <br />
+                    182-184 High Street North
+                    <br />
+                    East Ham, London E6 2JA
+                    <br />
+                    United Kingdom
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* CTA Box */}
+            <motion.div
+              className="bg-gradient-to-br from-orange-600 via-orange-500 to-blue-700 p-10 rounded-2xl shadow-2xl text-white relative overflow-hidden border border-orange-400/30"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-400 opacity-20 rounded-full -ml-16 -mb-16 blur-2xl"></div>
+
+              <div className="relative z-10">
+                <h3 className="text-3xl font-extrabold mb-4 leading-tight text-white">
+                  Ready to Start Your Project?
+                </h3>
+                <p className="text-white/90 mb-8 leading-relaxed text-lg">
+                  Let&apos;s discuss how we can help bring your engineering
+                  vision to life with innovative solutions.
+                </p>
+                <a
+                  href="mailto:info@skyrinengineering.com"
+                  className="inline-block bg-white text-orange-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl hover:shadow-2xl transform hover:scale-105"
+                >
+                  Schedule a Consultation →
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-200 p-1 text-center mt-0">
-        <motion.p
-          className="text-md font-inter"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          Ready to solve your engineering challenges? Contact us at{" "}
-          <a href="mailto:info@skyrinengg.com" className="underline">
-            info@skyrinengineering.com
-          </a>
-        </motion.p>
-        <p className="text-sm mt-2 font-inter">
-          &copy; 2025 Skyrin Engineering &amp; Consulting Services. All rights
-          reserved.
-        </p>
+      <footer className="bg-black text-gray-300 py-12 px-6 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <span className="font-bold text-2xl bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+                SKYRIN
+              </span>
+              <p className="text-sm text-gray-400 mt-4 leading-relaxed">
+                Engineering excellence since 2022. Providing innovative
+                solutions worldwide.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+              <div className="space-y-2 text-sm">
+                <a
+                  href="#about"
+                  className="block hover:text-orange-400 transition"
+                >
+                  About Us
+                </a>
+                <a
+                  href="#services"
+                  className="block hover:text-orange-400 transition"
+                >
+                  Services
+                </a>
+                <a
+                  href="#contact"
+                  className="block hover:text-orange-400 transition"
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white mb-4">Contact</h4>
+              <div className="space-y-2 text-sm text-gray-400">
+                <p>info@skyrinengineering.com</p>
+                <p>+91 99403 48468</p>
+                <p>London, United Kingdom</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+            <p>
+              &copy; 2025 Skyrin Engineering &amp; Consulting Services. All
+              rights reserved.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );

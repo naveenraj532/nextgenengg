@@ -1,4 +1,5 @@
 import clientlogos from "../assets/images/softwares.png";
+
 export const Clients = () => {
   return (
     <div className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 py-16 px-4">

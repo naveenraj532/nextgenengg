@@ -45,7 +45,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -76,7 +76,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -105,7 +105,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -145,7 +145,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -176,7 +176,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -208,7 +208,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -239,7 +239,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -270,7 +270,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 
@@ -304,7 +304,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9884988607",
+      phone: "+91 9940348468",
     },
   },
 ];

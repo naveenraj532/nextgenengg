@@ -32,7 +32,10 @@ const ContactInfo = () => {
             <FaPhoneAlt className="text-orange-600 text-xl mt-1" />
             <div>
               <p className="font-semibold">Phone</p>
-              <p>+91 9884988607 | +61 469 322 771 (AU) | +44 77 4151 9310 (UK) | +49 1521 8739837 (Germany)</p>
+              <p>
+                +91 9940348468 | +61 469 322 771 (AU) | +44 77 4151 9310 (UK) |
+                +49 1521 8739837 (Germany)
+              </p>
             </div>
           </div>
 
@@ -51,11 +54,11 @@ const ContactInfo = () => {
             <div>
               <p className="font-semibold">Address</p>
               <p>
-                43, 4th Cross, Gokula Nagar Extn,
+                Office 15702
                 <br />
-                Kattur, Tiruchirappalli – 620019,
+                182-184 High Street North
                 <br />
-                Tamil Nadu, India
+                East Ham London E6 2JA
               </p>
             </div>
           </div>
