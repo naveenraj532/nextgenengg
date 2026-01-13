@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Clients } from "./Clients"; // Add this import
 
+import { AnimatePresence } from "framer-motion";
+
 import {
   FaCogs,
   FaDraftingCompass,
   FaBolt,
   FaLeaf,
   FaStamp,
-  FaCarSide,
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
   FaCheckCircle,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 
 // Service Card Component
@@ -75,6 +78,7 @@ const StatCard = ({ number, label }) => (
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,6 +87,10 @@ function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
@@ -100,14 +108,13 @@ function App() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <span
             className={`font-bold text-2xl tracking-wider ${
-              scrolled
-                ? "bg-gradient-to-r from-orange-600 to-blue-700 bg-clip-text text-transparent"
-                : "text-white"
+              scrolled ? "text-orange-600" : "text-white"
             }`}
           >
             SKYRIN
           </span>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <a
               href="#about"
@@ -117,6 +124,7 @@ function App() {
             >
               About
             </a>
+
             <a
               href="#services"
               className={`font-medium text-sm hover:text-orange-600 transition ${
@@ -125,6 +133,7 @@ function App() {
             >
               Services
             </a>
+
             <a
               href="#clients"
               className={`font-medium text-sm hover:text-orange-600 transition ${
@@ -133,19 +142,88 @@ function App() {
             >
               Clients
             </a>
-            <Link to="/careers" className={`font-medium text-sm hover:text-orange-600 transition ${
+            <Link
+              to="/careers"
+              className={`font-medium text-sm hover:text-orange-600 transition ${
                 scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
-              }`}>
+              }`}
+            >
               Careers
             </Link>
+
             <a
               href="#contact"
-              className="px-5 py-2 bg-gradient-to-r from-orange-600 to-blue-700 text-white rounded-lg font-semibold text-sm hover:from-orange-700 hover:to-blue-800 transition shadow-md hover:shadow-lg"
+              className="px-5 py-2 bg-orange-600 text-white rounded-lg font-semibold text-sm hover:bg-orange-700 transition shadow-md hover:shadow-lg"
             >
               Contact Us
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`md:hidden text-2xl z-50 ${
+              scrolled ? "text-gray-700" : "text-white"
+            }`}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-white/95 backdrop-blur-lg shadow-lg overflow-hidden"
+            >
+              <div className="flex flex-col px-6 py-4 space-y-4">
+                <a
+                  href="#about"
+                  onClick={closeMobileMenu}
+                  className="font-medium text-gray-700 hover:text-orange-600 transition py-2 border-b border-gray-200"
+                >
+                  About
+                </a>
+
+                <a
+                  href="#services"
+                  onClick={closeMobileMenu}
+                  className="font-medium text-gray-700 hover:text-orange-600 transition py-2 border-b border-gray-200"
+                >
+                  Services
+                </a>
+
+                <a
+                  href="#clients"
+                  onClick={closeMobileMenu}
+                  className="font-medium text-gray-700 hover:text-orange-600 transition py-2 border-b border-gray-200"
+                >
+                  Clients
+                </a>
+                <Link
+                  to="/careers"
+                  onClick={closeMobileMenu}
+                  className="font-medium text-gray-700 hover:text-orange-600 transition py-2 border-b border-gray-200"
+                >
+                  Careers
+                </Link>
+
+                <a
+                  href="#contact"
+                  onClick={closeMobileMenu}
+                  className="px-5 py-3 bg-orange-600 text-white rounded-lg font-semibold text-center hover:bg-orange-700 transition shadow-md"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* Hero Section */}
@@ -466,7 +544,7 @@ function App() {
             <ServiceCard title="BIM Services" icon={FaCogs} to="/services/bim">
               Revit modeling, clash detection, MEP coordination for projects.
             </ServiceCard>
-
+            {/* 
             <ServiceCard
               title="Thermal Spray Coatings for Boilers"
               icon={FaBolt}
@@ -489,7 +567,7 @@ function App() {
               to="/services/ev-design"
             >
               EV architecture, drivetrain integration, and homologation support.
-            </ServiceCard>
+            </ServiceCard> */}
           </div>
         </div>
       </section>
@@ -543,13 +621,9 @@ function App() {
                 <div>
                   <p className="font-bold text-white mb-2 text-lg">Phone</p>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    +91 99403 48468
-                    <br />
                     +61 469 322 771 (AU)
                     <br />
                     +44 77 4151 9310 (UK)
-                    <br />
-                    +49 1521 8739837 (DE)
                   </p>
                 </div>
               </motion.div>
@@ -637,7 +711,7 @@ function App() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <span className="font-bold text-2xl bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <span className="font-bold text-2xl text-orange-500 tracking-wider">
                 SKYRIN
               </span>
               <p className="text-sm text-gray-400 mt-4 leading-relaxed">
