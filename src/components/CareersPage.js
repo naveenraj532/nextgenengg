@@ -19,7 +19,7 @@ export default function CareersPage() {
 
   // Replace this with your actual Google Form link
   const GOOGLE_FORM_LINK = "https://forms.gle/YOUR_FORM_ID_HERE";
-  const CAREERS_EMAIL = "careers@skyrinengineering.com";
+  const CAREERS_EMAIL = "info@skyrinengineering.com";
 
   const values = [
     {

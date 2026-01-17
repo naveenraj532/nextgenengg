@@ -328,15 +328,15 @@ function App() {
           </motion.h1>
 
           {/* Subtitle */}
-<motion.p
-  className="text-base sm:text-lg md:text-xl text-gray-200 font-medium italic mb-10 sm:mb-12 max-w-2xl mx-auto tracking-wide"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.4 }}
-  style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
->
-  Vision to Verified Engineering
-</motion.p>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-gray-200 font-medium italic mb-10 sm:mb-12 max-w-2xl mx-auto tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+          >
+            Vision to Verified Engineering
+          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
