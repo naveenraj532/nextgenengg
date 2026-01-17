@@ -79,6 +79,7 @@ const StatCard = ({ number, label }) => (
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -86,6 +87,25 @@ function App() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Add this new useEffect for background carousel
+  const backgroundImages = [
+    require("../assets/background1.jpg"),
+    require("../assets/background2.jpg"),
+    require("../assets/background3.jpg"),
+    require("../assets/background4.jpg"),
+    require("../assets/background5.jpg"),
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+      );
+    }, 5000); // Changes every 5 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   const closeMobileMenu = () => {
@@ -227,28 +247,53 @@ function App() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24"
-        style={{
-          backgroundImage: `url(${require("../assets/background.jpg")})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-slate-900/70 to-black/75"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24">
+        {/* Animated Background Images - Cross Fade */}
+        {backgroundImages.map((image, index) => (
+          <motion.div
+            key={index}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: currentImageIndex === index ? 1 : 0,
+              scale: currentImageIndex === index ? 1 : 1.05,
+            }}
+            transition={{
+              duration: 1.5,
+              ease: "easeInOut",
+            }}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        ))}
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-slate-900/70 to-black/75 z-10"></div>
+
+        <div className="relative z-20 max-w-5xl mx-auto px-6 text-center">
           {/* Logo */}
-          <motion.img
-            src={require("../assets/logo.png")}
-            alt="Skyrin Logo"
-            className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain mx-auto mb-6 sm:mb-8"
+          <motion.div
+            className="relative mx-auto mb-6 sm:mb-8 w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ filter: "drop-shadow(0 0 25px rgba(255,255,255,0.4))" }}
-          />
+          >
+            {/* Simple White Glow Behind Logo */}
+            <div className="absolute inset-0 bg-white/40 rounded-full blur-2xl scale-110" />
+
+            {/* Logo Image */}
+            <img
+              src={require("../assets/logo.png")}
+              alt="Skyrin Logo"
+              className="relative z-10 w-full h-full object-contain"
+              style={{
+                filter: "drop-shadow(0 0 20px rgba(255,255,255,0.5))",
+              }}
+            />
+          </motion.div>
 
           {/* Badge */}
           <motion.div
@@ -283,15 +328,15 @@ function App() {
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.p
-            className="text-base sm:text-lg md:text-xl text-gray-200 font-medium mb-10 sm:mb-12 max-w-2xl mx-auto tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
-          >
-            Engineering • Design • Detailing • Consulting
-          </motion.p>
+<motion.p
+  className="text-base sm:text-lg md:text-xl text-gray-200 font-medium italic mb-10 sm:mb-12 max-w-2xl mx-auto tracking-wide"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+>
+  Vision to Verified Engineering
+</motion.p>
 
           {/* CTA Buttons */}
           <motion.div
@@ -306,6 +351,7 @@ function App() {
             >
               Explore Services
             </a>
+
             <a
               href="#contact"
               className="w-full sm:w-auto px-8 py-3.5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-lg font-bold text-sm sm:text-base hover:bg-white/20 transition-all duration-300 shadow-lg"
@@ -317,7 +363,7 @@ function App() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
@@ -621,9 +667,13 @@ function App() {
                 <div>
                   <p className="font-bold text-white mb-2 text-lg">Phone</p>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    +61 469 322 771 (AU)
+                    +91 994034846 (IN)
+                    <br />
+                    +64 22 460 4867 (AU / NZ)
                     <br />
                     +44 77 4151 9310 (UK)
+                    <br />
+                    +1 737 414 5137 (USA)
                   </p>
                 </div>
               </motion.div>
@@ -748,7 +798,7 @@ function App() {
               <h4 className="font-semibold text-white mb-4">Contact</h4>
               <div className="space-y-2 text-sm text-gray-400">
                 <p>info@skyrinengineering.com</p>
-                <p>+91 99403 48468</p>
+                <p>+44 77 4151 931</p>
                 <p>London, United Kingdom</p>
               </div>
             </div>

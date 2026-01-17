@@ -45,7 +45,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -76,7 +76,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -105,7 +105,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -145,7 +145,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -176,7 +176,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -208,7 +208,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -239,7 +239,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -270,7 +270,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 
@@ -304,7 +304,7 @@ export const services = [
     ],
     contact: {
       email: "info@skyrinengineering.com",
-      phone: "+91 9940348468",
+      phone: "+44 77 4151 931",
     },
   },
 ];
