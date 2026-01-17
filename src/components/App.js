@@ -276,7 +276,7 @@ function App() {
         <div className="relative z-20 max-w-5xl mx-auto px-6 text-center">
           {/* Logo */}
           <motion.div
-            className="relative mx-auto mb-6 sm:mb-8 w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36"
+            className="relative mx-auto mb-6 sm:mb-8 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
