@@ -160,7 +160,7 @@ function App() {
                 scrolled ? "text-gray-700" : "text-white hover:text-orange-400"
               }`}
             >
-              Clients
+              Softwares
             </a>
             <Link
               to="/careers"
