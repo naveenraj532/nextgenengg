@@ -1,135 +1,243 @@
-// src/components/ServiceTemplate.jsx
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaCheckCircle, FaArrowRight } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaCheckCircle,
+  FaChevronRight,
+  FaDownload,
+  FaEnvelope,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import heroBackground from "../assets/background3.jpg";
+import detailBackground from "../assets/deliverablesbg.jpg";
+import logo from "../assets/logo.png";
+
+const workflowSteps = [
+  {
+    step: "01",
+    title: "Scope Alignment",
+    desc: "We review requirements, constraints, codes, and project expectations before execution begins.",
+  },
+  {
+    step: "02",
+    title: "Engineering Development",
+    desc: "Our team prepares calculations, models, drafting packages, and supporting technical outputs.",
+  },
+  {
+    step: "03",
+    title: "Review & Coordination",
+    desc: "Documentation is checked for clarity, coordination, and practical use across disciplines.",
+  },
+  {
+    step: "04",
+    title: "Delivery Support",
+    desc: "Final deliverables are issued in a format teams can act on for review, procurement, or execution.",
+  },
+];
+
+const HeroStat = ({ value, label }) => (
+  <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.25)] backdrop-blur-md">
+    <div className="text-2xl font-black text-white sm:text-3xl">{value}</div>
+    <div className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-200">
+      {label}
+    </div>
+  </div>
+);
 
 export default function ServiceTemplate({ service }) {
   const Icon = service.icon;
 
   return (
-    <div className="min-h-screen font-inter bg-gradient-to-br from-blue-50 to-gray-100 w-full">
-      {/* Hero Section */}
-      <header className="relative py-32 bg-[url('/src/assets/background.jpg')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/65"></div>
-        <div className="relative max-w-6xl mx-auto px-6 text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <Icon className="text-orange-500 text-7xl md:text-8xl drop-shadow-2xl mx-auto" />
-          </motion.div>
+    <div className="min-h-screen bg-[#f5f7fb] text-slate-900">
+      <section className="relative overflow-hidden pt-16">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(2,6,23,0.93)_0%,rgba(15,23,42,0.88)_42%,rgba(30,41,59,0.82)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.18),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(56,189,248,0.12),transparent_26%)]" />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-wide drop-shadow-lg"
-          >
-            {service.title}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-6 text-gray-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-          >
-            {service.overview}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-10 flex justify-center gap-4 flex-wrap"
-          >
-            <a
-              href="/skyrinbook.pdf"
-              download
-              className="px-8 py-3 rounded-lg bg-orange-600 text-white font-semibold shadow-lg hover:bg-orange-700 hover:shadow-xl transition transform hover:scale-105"
-            >
-              Download Brochure
-            </a>
+        <div className="relative z-10 mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-24">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <Link
               to="/"
-              className="px-8 py-3 rounded-lg bg-white text-orange-600 font-semibold shadow-lg hover:bg-gray-100 hover:shadow-xl transition transform hover:scale-105"
+              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/15"
             >
+              <img src={logo} alt="Skyrin Engineering" className="h-8 w-8 rounded-full object-contain" />
               Back to Home
             </Link>
-          </motion.div>
-        </div>
-      </header>
-
-      {/* About This Service Section */}
-      <section className="py-20 px-6 md:px-8 max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-orange-600 mb-8 tracking-tight italic">
-            What We Offer
-          </h2>
-          <div className="space-y-6 text-gray-600 text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
-            <p>
-              Our {service.title.toLowerCase()} services combine cutting-edge technology 
-              with decades of engineering expertise. We work closely with our clients to 
-              understand their unique challenges and deliver solutions that are not only 
-              technically sound but also practical and cost-effective.
-            </p>
-            <p>
-              Whether you&apos;re developing a new product, optimizing existing systems, or 
-              solving complex engineering problems, our team provides comprehensive support 
-              from concept through execution. We leverage industry-leading tools and 
-              methodologies to ensure precision, compliance, and superior results.
-            </p>
-            <p>
-              With a proven track record across multiple industries, we pride ourselves on 
-              delivering projects on time and within budget while maintaining the highest 
-              standards of quality and safety.
-            </p>
+            <a
+              href="/skyrinbook.pdf"
+              download="Skyrin_Engineering_Booklet.pdf"
+              className="inline-flex items-center gap-3 rounded-full bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700"
+            >
+              <FaDownload />
+              Download Profile
+            </a>
           </div>
-        </motion.div>
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+            <div>
+              <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-orange-200">
+                Service Overview
+              </div>
+              <h1
+                className="mt-6 max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl"
+                style={{ fontFamily: "Montserrat, sans-serif" }}
+              >
+                {service.title}
+              </h1>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-slate-200 sm:text-lg">
+                {service.overview}
+              </p>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href={`mailto:${service.contact.email}`}
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-orange-700 transition hover:bg-orange-50"
+                >
+                  Request Consultation
+                  <FaArrowRight />
+                </a>
+                <a
+                  href={`tel:${service.contact.phone}`}
+                  className="inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/15"
+                >
+                  Call About This Service
+                  <FaPhoneAlt />
+                </a>
+              </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              className="rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-[0_30px_90px_rgba(15,23,42,0.28)] backdrop-blur-md sm:p-8"
+            >
+              <div className="flex items-center gap-4">
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-orange-500/15 text-orange-300">
+                  <Icon className="text-3xl" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold uppercase tracking-[0.24em] text-orange-200">
+                    Skyrin Focus
+                  </div>
+                  <div className="mt-1 text-2xl font-bold text-white">
+                    Practical, project-ready delivery
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <HeroStat value={service.capabilities.length} label="Capabilities Included" />
+                <HeroStat value={service.deliverables.length} label="Core Deliverables" />
+                <HeroStat value="Client-Ready" label="Documentation Standard" />
+                <HeroStat value="End-To-End" label="Support Mindset" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
-      {/* Capabilities Section */}
-      <section 
-        className="relative w-full py-24 px-6 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${require('../assets/deliverablesbg.jpg')})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black/75"></div>
-        
-        <div className="relative w-full max-w-7xl mx-auto z-10">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-12 text-center text-white tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Our Capabilities
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {service.capabilities.map((cap, idx) => (
+      <section className="px-5 py-16 sm:px-6 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <div className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-orange-700">
+              What This Service Covers
+            </div>
+            <h2
+              className="mt-5 text-3xl font-black leading-tight text-slate-900 sm:text-4xl lg:text-5xl"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              Technical support shaped around useful outputs, not just activity.
+            </h2>
+            <div className="mt-6 space-y-5 rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_24px_70px_rgba(15,23,42,0.06)]">
+              <p className="text-base leading-8 text-slate-600">
+                Skyrin approaches {service.title.toLowerCase()} with a focus on
+                clarity, coordination, and project usability. The goal is not
+                only to produce engineering documents, but to create outputs
+                that teams can review, approve, fabricate, construct, or act on
+                with confidence.
+              </p>
+              <p className="text-base leading-8 text-slate-600">
+                This service is suited to clients who need dependable technical
+                support, better documentation quality, and an engineering
+                partner who understands how design decisions affect downstream
+                execution.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            {[
+              "Clear documentation structure",
+              "Responsive engineering coordination",
+              "Practical and build-aware outputs",
+              "Professional communication and review readiness",
+            ].map((point) => (
+              <div
+                key={point}
+                className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-[0_18px_45px_rgba(15,23,42,0.05)]"
+              >
+                <FaCheckCircle className="text-2xl text-orange-600" />
+                <div className="mt-4 text-lg font-bold text-slate-900">{point}</div>
+                <p className="mt-2 text-sm leading-7 text-slate-600">
+                  Included to help this service deliver better accuracy,
+                  smoother review, and stronger project confidence.
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden px-5 py-16 sm:px-6 lg:py-24">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${detailBackground})` }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.9),rgba(15,23,42,0.88))]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <div className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-orange-200">
+              Capabilities
+            </div>
+            <h2
+              className="mt-5 text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              Detailed capabilities within this service line.
+            </h2>
+            <p className="mt-4 text-base leading-8 text-slate-200 sm:text-lg">
+              Each capability below reflects areas where the service can be
+              tailored to specific project needs, constraints, and deliverable
+              expectations.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {service.capabilities.map((capability, idx) => (
               <motion.div
-                key={idx}
+                key={capability}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all"
+                transition={{ duration: 0.4, delay: idx * 0.04 }}
+                className="rounded-[1.75rem] border border-white/10 bg-white/10 p-6 text-white shadow-[0_20px_60px_rgba(15,23,42,0.2)] backdrop-blur-md"
               >
-                <div className="flex items-start gap-3">
-                  <FaCheckCircle className="text-orange-600 text-xl mt-0.5 flex-shrink-0" />
-                  <p className="font-medium text-gray-800 text-base leading-relaxed">{cap}</p>
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500/15 text-orange-300">
+                    <FaCheckCircle />
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold">{capability}</div>
+                    <p className="mt-2 text-sm leading-7 text-slate-200">
+                      Delivered with an emphasis on usable documentation,
+                      technical rigor, and coordination with the overall scope.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -137,138 +245,133 @@ export default function ServiceTemplate({ service }) {
         </div>
       </section>
 
-      {/* Deliverables & Workflow Section */}
-      <section className="w-full py-24 px-6 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
-            {/* Deliverables */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-orange-600 to-orange-700 p-10 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-white"
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1 h-12 bg-white rounded-full"></div>
-                <h3 className="text-3xl font-bold">
-                  Deliverables
-                </h3>
-              </div>
-              
-              <ul className="space-y-4">
-                {service.deliverables.map((d, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors"
-                  >
-                    <FaCheckCircle className="text-white text-xl mt-1 flex-shrink-0" />
-                    <span className="text-white font-medium">{d}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+      <section className="px-5 py-16 sm:px-6 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="rounded-[2rem] bg-gradient-to-br from-orange-600 to-orange-700 p-8 text-white shadow-[0_30px_90px_rgba(249,115,22,0.22)]"
+          >
+            <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-orange-100">
+              Deliverables
+            </div>
+            <h3 className="mt-5 text-3xl font-black">What You Can Expect</h3>
+            <div className="mt-8 space-y-4">
+              {service.deliverables.map((deliverable) => (
+                <div
+                  key={deliverable}
+                  className="flex items-start gap-4 rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur-sm"
+                >
+                  <FaCheckCircle className="mt-1 flex-shrink-0 text-white" />
+                  <div className="text-sm font-medium leading-7 text-white">
+                    {deliverable}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-            {/* Workflow */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-gray-800 via-gray-900 to-black p-10 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-white border border-orange-500/20"
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1 h-12 bg-orange-500 rounded-full"></div>
-                <h3 className="text-3xl font-bold">
-                  How We Work
-                </h3>
-              </div>
-
-              <div className="space-y-6">
-                {[
-                  { step: "01", title: "Consultation", desc: "Understanding your requirements and challenges" },
-                  { step: "02", title: "Proposal", desc: "Detailed project scope and timeline" },
-                  { step: "03", title: "Engineering & Analysis", desc: "FEA/CFD and detailed design work" },
-                  { step: "04", title: "Documentation", desc: "Shop drawings, MTO, and specifications" },
-                  { step: "05", title: "Handover & Support", desc: "Final delivery with ongoing assistance" }
-                ].map((phase, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="flex-shrink-0 w-12 h-12 bg-orange-500/20 border border-orange-500/40 rounded-full flex items-center justify-center font-bold text-lg group-hover:bg-orange-500/30 group-hover:border-orange-500/60 transition">
-                      {phase.step}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_24px_70px_rgba(15,23,42,0.06)]"
+          >
+            <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600">
+              Workflow
+            </div>
+            <h3 className="mt-5 text-3xl font-black text-slate-900">
+              How Skyrin Typically Delivers
+            </h3>
+            <div className="mt-8 space-y-5">
+              {workflowSteps.map((phase) => (
+                <div key={phase.step} className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
+                    {phase.step}
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-slate-900">
+                      {phase.title}
                     </div>
-                    <div>
-                      <h4 className="font-bold text-lg mb-1 text-orange-400">{phase.title}</h4>
-                      <p className="text-gray-300 text-sm">{phase.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-          </div>
+                    <p className="mt-1 text-sm leading-7 text-slate-600">
+                      {phase.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="w-full py-20 px-6 bg-gradient-to-r from-gray-800 to-gray-900">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Ready to Get Started?
-          </h3>
-          <p className="text-gray-300 text-lg mb-8">
-            Let&apos;s discuss how we can help bring your project to life with our expert engineering solutions.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-left">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 min-w-[280px] hover:bg-white/20 transition">
-              <p className="text-orange-400 font-semibold mb-2">Email Us</p>
+      <section className="px-5 pb-16 sm:px-6 lg:pb-24">
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-[2.25rem] bg-slate-950 p-8 text-white shadow-[0_35px_100px_rgba(15,23,42,0.18)] lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
+              Next Step
+            </div>
+            <h3 className="mt-5 text-3xl font-black sm:text-4xl">
+              Want to discuss this service for your project?
+            </h3>
+            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+              Reach out with your scope, drawings, or requirements and we can
+              discuss the most practical engineering approach for this service
+              area.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <a
                 href={`mailto:${service.contact.email}`}
-                className="text-white text-lg font-medium hover:text-orange-400 transition flex items-center gap-2"
+                className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
               >
-                {service.contact.email}
-                <FaArrowRight className="text-sm" />
+                <div className="flex items-center gap-3 text-orange-200">
+                  <FaEnvelope />
+                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
+                    Email
+                  </span>
+                </div>
+                <div className="mt-3 text-lg font-bold text-white">
+                  {service.contact.email}
+                </div>
               </a>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 min-w-[280px] hover:bg-white/20 transition">
-              <p className="text-orange-400 font-semibold mb-2">Call Us</p>
               <a
                 href={`tel:${service.contact.phone}`}
-                className="text-white text-lg font-medium hover:text-orange-400 transition flex items-center gap-2"
+                className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
               >
-                {service.contact.phone}
-                <FaArrowRight className="text-sm" />
+                <div className="flex items-center gap-3 text-orange-200">
+                  <FaPhoneAlt />
+                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
+                    Phone
+                  </span>
+                </div>
+                <div className="mt-3 text-lg font-bold text-white">
+                  {service.contact.phone}
+                </div>
               </a>
             </div>
           </div>
-        </motion.div>
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-gray-200 py-8 text-center">
-        <p className="text-sm">
-          &copy; 2025 Skyrin Engineering & Consulting Services. All rights reserved.
-        </p>
-      </footer>
+          <div className="flex flex-col gap-4">
+            <a
+              href={`mailto:${service.contact.email}`}
+              className="inline-flex items-center justify-center gap-3 rounded-full bg-orange-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-700"
+            >
+              Start A Conversation
+              <FaArrowRight />
+            </a>
+            <Link
+              to="/"
+              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/15"
+            >
+              Explore More Services
+              <FaChevronRight />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

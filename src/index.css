@@ -8,7 +8,23 @@
 * {
   margin: 0;
   padding: 0;
-  
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f5f7fb;
+  color: #0f172a;
+  font-family: "Palanquin", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 @layer utilities {
