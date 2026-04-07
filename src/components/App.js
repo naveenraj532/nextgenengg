@@ -667,7 +667,7 @@ function App() {
                 <div>
                   <p className="font-bold text-white mb-2 text-lg">Phone</p>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    +91 994034846 (IN)
+                    +91 99403 48468 (IN)
                     <br />
                     +61 86 616 0605 (AU / NZ)
                     <br />
@@ -739,7 +739,7 @@ function App() {
                       <br />
                       India
                       <br />
-                      +91 994034846
+                      +91 99403 48468
                     </p>
                   </div>
                 </div>
