@@ -101,7 +101,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length,
       );
     }, 5000); // Changes every 5 seconds
 
@@ -669,11 +669,11 @@ function App() {
                   <p className="text-sm text-gray-300 leading-relaxed">
                     +91 994034846 (IN)
                     <br />
-                    +64 22 460 4867 (AU / NZ)
+                    +61 86 616 0605 (AU / NZ)
                     <br />
                     +44 77 4151 9310 (UK)
                     <br />
-                    +1 737 414 5137 (USA)
+                    +1 501 746 3438 (USA)
                   </p>
                 </div>
               </motion.div>
@@ -712,7 +712,9 @@ function App() {
                   <FaMapMarkerAlt className="text-white text-xl" />
                 </div>
                 <div>
-                  <p className="font-bold text-white mb-2 text-lg">Address</p>
+                  <p className="font-bold text-white mb-2 text-lg">
+                    Corporate Address
+                  </p>
                   <p className="text-sm text-gray-300 leading-relaxed">
                     Office 15702 E6 2JA
                     <br />
@@ -721,6 +723,8 @@ function App() {
                     East Ham, London E6 2JA
                     <br />
                     United Kingdom
+                    <br />
+                    +44 77 4151 9310
                   </p>
                 </div>
               </motion.div>
