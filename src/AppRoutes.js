@@ -1,9 +1,8 @@
 // src/AppRoutes.jsx
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import App from "./components/App"; // your current homepage component
 import ServicePage from "./pages/ServicePage";
-import CareersPage from './components/CareersPage';
-
+import CareersPage from "./components/CareersPage";
 
 export default function AppRoutes() {
   return (
@@ -11,7 +10,7 @@ export default function AppRoutes() {
       <Route path="/" element={<App />} />
       <Route path="/services/:slug" element={<ServicePage />} />
       <Route path="/careers" element={<CareersPage />} />
-      {/* optionally add a catch-all 404 route */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
