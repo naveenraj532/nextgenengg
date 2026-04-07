@@ -711,21 +711,37 @@ function App() {
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg">
                   <FaMapMarkerAlt className="text-white text-xl" />
                 </div>
-                <div>
-                  <p className="font-bold text-white mb-2 text-lg">
-                    Corporate Address
-                  </p>
-                  <p className="text-sm text-gray-300 leading-relaxed">
-                    Office 15702 E6 2JA
-                    <br />
-                    182-184 High Street North
-                    <br />
-                    East Ham, London E6 2JA
-                    <br />
-                    United Kingdom
-                    <br />
-                    +44 77 4151 9310
-                  </p>
+                <div className="grid gap-6 md:grid-cols-2 flex-1">
+                  <div>
+                    <p className="font-bold text-white mb-2 text-lg">
+                      Corporate Address
+                    </p>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Office 15702 E6 2JA
+                      <br />
+                      182-184 High Street North
+                      <br />
+                      East Ham, London E6 2JA
+                      <br />
+                      United Kingdom
+                      <br />
+                      +44 77 4151 9310
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-white mb-2 text-lg">
+                      Back Office
+                    </p>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      4/222, 6th Street, Sakthi Nagar, Kattur,
+                      <br />
+                      Tiruchirappalli - 620019
+                      <br />
+                      India
+                      <br />
+                      +91 994034846
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </div>
