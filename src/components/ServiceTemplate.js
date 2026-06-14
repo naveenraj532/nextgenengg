@@ -4,7 +4,6 @@ import {
   FaArrowRight,
   FaCheckCircle,
   FaChevronRight,
-  FaDownload,
   FaEnvelope,
   FaPhoneAlt,
 } from "react-icons/fa";
@@ -66,14 +65,6 @@ export default function ServiceTemplate({ service }) {
               <img src={logo} alt="Skyrin Engineering" className="h-8 w-8 rounded-full object-contain" />
               Back to Home
             </Link>
-            <a
-              href="/skyrinbook.pdf"
-              download="Skyrin_Engineering_Booklet.pdf"
-              className="inline-flex items-center gap-3 rounded-full bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700"
-            >
-              <FaDownload />
-              Download Profile
-            </a>
           </div>
 
           <div className="mt-12 grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">

@@ -8,7 +8,6 @@ import {
   FaCheckCircle,
   FaChevronRight,
   FaClipboardCheck,
-  FaDownload,
   FaEnvelope,
   FaGlobe,
   FaIndustry,
@@ -23,7 +22,6 @@ import heroBackground from "../assets/background1.jpg";
 import servicesBackground from "../assets/services_background.jpg";
 import logo from "../assets/logo.png";
 import { services } from "../data/services";
-import { Clients } from "./Clients";
 
 const capabilityHighlights = [
   {
@@ -407,7 +405,6 @@ function App() {
             {[
               ["About", "#about"],
               ["Services", "#services"],
-              ["Software", "#clients"],
               ["Contact", "#contact"],
             ].map(([label, href]) => (
               <a
@@ -473,13 +470,6 @@ function App() {
                 >
                   Services
                 </a>
-                <a
-                  href="#clients"
-                  onClick={closeMobileMenu}
-                  className="rounded-xl px-3 py-3 font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-orange-600"
-                >
-                  Software
-                </a>
                 <Link
                   to="/careers"
                   onClick={closeMobileMenu}
@@ -537,14 +527,6 @@ function App() {
               >
                 Explore Core Services
                 <FaArrowRight />
-              </a>
-              <a
-                href="/skyrinbook.pdf"
-                download="Skyrin_Engineering_Booklet.pdf"
-                className="inline-flex items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/15"
-              >
-                <FaDownload />
-                Download Company Profile
               </a>
             </div>
 
@@ -810,10 +792,6 @@ function App() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section id="clients" className="scroll-mt-24">
-        <Clients />
       </section>
 
       <section className="px-5 py-16 sm:px-6 lg:py-24">
@@ -1145,9 +1123,6 @@ function App() {
             </a>
             <a href="#services" className="transition hover:text-orange-600">
               Services
-            </a>
-            <a href="#clients" className="transition hover:text-orange-600">
-              Software
             </a>
             <a href="#contact" className="transition hover:text-orange-600">
               Contact
